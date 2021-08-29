@@ -1,0 +1,47 @@
+.container {
+  @apply flex flex-row justify-between capitalize font-primary max-w-7xl mx-auto;
+}
+
+.home {
+  @apply hidden md:block font-semibold relative;
+}
+
+.listItem {
+  @apply hidden md:flex flex-row;
+}
+
+.itemMenu {
+  @apply px-4 mx-4 font-semibold relative;
+}
+
+.home:hover,
+.itemMenu:hover {
+  @apply text-blue-700;
+}
+
+.active {
+  @apply text-lg;
+}
+
+.active::before {
+  @apply md:w-1.5 md:h-1.5 rounded-full md:bg-blue-700 absolute -top-1;
+  left: 50%;
+  transform: translateX(-50%);
+  content: '';
+}
+
+.mobileNav {
+  @apply bg-blue-900 md:hidden fixed z-10 h-screen opacity-0;
+  width: 60vw;
+  top: 0;
+  left: 0;
+}
+
+.listItemMobile {
+  @apply flex flex-col justify-around text-white p-6 text-xl;
+  height: 60vh;
+}
+
+.itemMenuMobile {
+  @apply flex flex-row gap-x-4 font-semibold;
+}

@@ -1,75 +1,85 @@
 import Head from 'next/head';
 import Image from 'next/image';
-
-import styles from '@/styles/Home.module.css';
+import { m, LazyMotion, domAnimation } from 'framer-motion';
+import homeStyles from '@/styles/Home.module.css';
+import Projects from '@/components/section/projects';
+import Contact from '@/components/section/contact';
+import Layout from '../components/layout/layout';
+import cvImg from '../../public/curriculum-vitae.svg';
+import linkedinImg from '../../public/linkedin.svg';
+import gmailImg from '../../public/gmail.svg';
 
 export default function Home() {
+  const socialMediaImgSize = 32;
+  const images = [
+    { image: cvImg, class: homeStyles.cvImg, href: `` },
+    {
+      image: linkedinImg,
+      class: homeStyles.linkedinImg,
+      href: `https://www.linkedin.com/in/maulanaichwan/`,
+    },
+    {
+      image: gmailImg,
+      class: homeStyles.gmailImg,
+      href: `https://mail.google.com/mail/u/0/#inbox?compose=CllgCHrfTPLqRNQGxWfmkPBlVVgDjFBhwVxhKjhvPJjrjFfpHNKnQpWvFBXzXLTdwbkHQJvzMpg`,
+    },
+  ];
+
+  const animateSocialMedia = (id: any) => {
+    const variantsChild = {
+      initial: {
+        y: 0,
+      },
+      animate: {
+        y: -50,
+        transition: {
+          delay: 0.1 + id,
+          duration: 3,
+          repeat: Infinity,
+          ease: [0.17, 0.67, 0.83, 0.67],
+        },
+      },
+    };
+
+    return variantsChild;
+  };
   return (
-    <div className={styles.container}>
+    <Layout>
       <Head>
         <title>TypeScript starter for Next.js</title>
-        <meta
-          name="description"
-          content="TypeScript starter for Next.js that includes all you need to build amazing apps"
-        />
+        <meta name="description" content="Maulana Ichwan's Portofolio" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <LazyMotion features={domAnimation}>
+        <section className={homeStyles.container}>
+          <div className={homeStyles.main}>
+            <h3 className={homeStyles.name}>Maulana Ichwan</h3>
+            <h1 className={homeStyles.textSkill1}>Machine Learning</h1>
+            <h1 className={homeStyles.textSkill2}>Web Development</h1>
+          </div>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{` `}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <p className={styles.description}>This is not an official starter!</p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=typescript-nextjs-starter"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=typescript-nextjs-starter"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{` `}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
-    </div>
+          <div className={homeStyles.images}>
+            {images.map((image, id) => (
+              <m.a
+                className={image.class}
+                initial="initial"
+                animate="animate"
+                variants={animateSocialMedia(id)}
+                key={image.class}
+              >
+                <Image
+                  src={image.image}
+                  alt="curriculum vitae"
+                  width={socialMediaImgSize}
+                  height={socialMediaImgSize}
+                />
+              </m.a>
+            ))}
+          </div>
+        </section>
+        <Projects />
+        <Contact />
+      </LazyMotion>
+    </Layout>
   );
 }

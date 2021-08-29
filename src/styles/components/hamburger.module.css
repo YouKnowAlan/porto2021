@@ -1,0 +1,16 @@
+.hamburger {
+  @apply fixed md:hidden bottom-10 right-5 flex flex-col h-20 w-20 border-2 bg-blue-900 rounded-full justify-center items-center group z-50;
+}
+
+.hamLine {
+  @apply w-8 my-1 z-10 rounded-full bg-white transition ease-in-out transform duration-300;
+  height: 0.18rem;
+}
+
+.hamLineTopRotate {
+  @apply rotate-45 translate-y-3;
+}
+
+.hamLineBottomRotate {
+  @apply -rotate-45 -translate-y-2;
+}
